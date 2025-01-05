@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS type (
     type_name VARCHAR(50) UNIQUE NOT NULL
 );
 
-CREATE TABLE pokemon_type (
+CREATE TABLE IF NOT EXISTS pokemon_type (
     pokemon_id INTEGER REFERENCES pokemon(id) ON DELETE CASCADE,
     type_id INTEGER REFERENCES type(id) ON DELETE CASCADE,
     PRIMARY KEY (pokemon_id, type_id)
