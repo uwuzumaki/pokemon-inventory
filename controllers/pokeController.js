@@ -18,10 +18,20 @@ const pokeTrainer = async (req, res) => {
   res.render("poketrainer", { title: "Pokemon Search" });
 };
 
+const pokeCreateGet = async (req, res) => {
+  res.render("pokecreate", { title: "Pokemon Create" });
+};
+
+const pokeCreatePost = async (req, res) => {
+  res.render("newpokemon", { title: "New Pokemon" });
+};
+
 module.exports = {
   homepage,
   pokemon,
   pokeRegion,
   pokeType,
   pokeTrainer,
+  pokeCreateGet,
+  pokeCreatePost,
 };
