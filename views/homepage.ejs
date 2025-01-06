@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/styles/styles.css" rel="stylesheet" />
-    <title><%= title %></title>
-  </head>
-  <body>
-    <h1 class="text-xl">Hellow World</h1>
-    <p class="mt-1 text-lg font-medium">123</p>
+  <body class="min-h-full">
+    <%- include("./partials/header.ejs") %>
+    <p class="mt-1 text-lg font-medium">
+      Enter a Pokemon, select a region, type, or trainer to get started!
+    </p>
   </body>
 </html>
