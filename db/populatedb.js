@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+//Creates the DBs
 require("dotenv").config();
 const { Client } = require("pg");
 
@@ -9,7 +10,7 @@ CREATE TABLE IF NOT EXISTS pokemon (
 );
 
 CREATE TABLE IF NOT EXISTS type (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     type_name VARCHAR(50) UNIQUE NOT NULL
 );
 

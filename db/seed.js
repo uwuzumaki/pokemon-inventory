@@ -1,3 +1,4 @@
+//Populates the DBs
 require("dotenv").config();
 const format = require("pg-format");
 const pool = require("./pool");
@@ -24,7 +25,7 @@ const pokemonGet = async (limit, offset) => {
 };
 
 // Gets types from PokemonAPI using pagination
-const types = async () => {
+const typesGet = async () => {
   // Gets a list of types
   const url = "https://pokeapi.co/api/v2/type/";
   try {
@@ -37,7 +38,7 @@ const types = async () => {
   }
 };
 
-// SQL for the insertion
+// SQL for the insertion of Pokemon
 const SQL = `
 INSERT INTO pokemon (id, name)
 VALUES %L
@@ -78,8 +79,29 @@ const fetchAndStore = async () => {
   console.log("done");
 };
 
+const insertTypes = async () => {
+  const types = await typesGet();
+  const values = types.results.map((type) => [type.name]);
+  const client = await pool.connect();
+  try {
+    await client.query("Begin");
+    const formattedQuery = format(
+      `INSERT INTO type (type_name) VALUES %L ON CONFLICT (type_name) DO NOTHING;`,
+      values
+    );
+    await client.query(formattedQuery);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    console.log(error);
+  } finally {
+    client.release();
+  }
+};
+
 const main = async () => {
-  await fetchAndStore();
+  // await fetchAndStore();
+  await insertTypes();
 };
 
 main();
