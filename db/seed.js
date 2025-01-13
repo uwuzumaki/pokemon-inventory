@@ -1,8 +1,9 @@
 require("dotenv").config();
-const { Client } = require("pg");
+const format = require("pg-format");
+const pool = require("./pool");
 
 // Gets pokemon from PokemonAPI using pagination
-const pokemon = async (limit, offset) => {
+const pokemonGet = async (limit, offset) => {
   const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
   try {
     // Gets a list of the pokemon name and their url
@@ -36,23 +37,49 @@ const types = async () => {
   }
 };
 
+// SQL for the insertion
+const SQL = `
+INSERT INTO pokemon (id, name)
+VALUES %L
+ON CONFLICT (id) DO NOTHING;
+`;
+
+// Takes batch data (which includes pokemon types) and transforms it into only ID and Name
+// The data is placed as an array of arrays and bulk inserted into the DB.
+// Also uses pg-format so that dynamic queries could be used.
+const insertPokemon = async (pokeBatch) => {
+  const values = pokeBatch.map((pokemon) => [pokemon.id, pokemon.name]);
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const formattedQuery = format(SQL, values);
+
+    await client.query(formattedQuery);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    console.log(error);
+  } finally {
+    client.release();
+  }
+};
+
+// Calls pokemonGet to fetch in batches then inserts into DB in batches
 const fetchAndStore = async () => {
   const batchSize = 100;
   const total = 1302;
 
-  for (let offset = 0; offset < 200; offset += batchSize) {
+  for (let offset = 0; offset < 1302; offset += batchSize) {
     console.log(`Fetching Pokemon ${offset + 1} to ${offset + batchSize}`);
-    const pokeBatch = await pokemon(batchSize, offset);
-    console.log(pokeBatch);
-    console.log("Inserting...");
+    const pokeBatch = await pokemonGet(batchSize, offset);
+    await insertPokemon(pokeBatch);
+    console.log(`Inserting pokemon ${offset + 1} - ${offset + batchSize}`);
   }
+  console.log("done");
 };
 
 const main = async () => {
-  const wowee = await fetchAndStore();
-  // const type = await types();
-  // console.log(wowee);
-  // console.log(type);
+  await fetchAndStore();
 };
 
 main();
