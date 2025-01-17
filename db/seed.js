@@ -65,6 +65,9 @@ const insertPokemon = async (pokeBatch) => {
   }
 };
 
+// Gets batch array of pokemon and types array.
+// Checks each pokemon's type name and checks it against type name. If they match, put the type ID into an array.
+// After checking 1 or both types, returns an array containing the pokemon id and the 1 or 2 type ids. The array is pushed into the db.
 const insertPokemonTypes = async (pokemon, types) => {
   const values = pokemon.map((pokemon) => {
     const arr = [];
@@ -90,7 +93,6 @@ const insertPokemonTypes = async (pokemon, types) => {
     );
     await client.query(formattedQuery);
     await client.query("COMMIT");
-    return values;
   } catch (error) {
     await client.query("ROLLBACK");
     console.log(error);
@@ -100,6 +102,7 @@ const insertPokemonTypes = async (pokemon, types) => {
 };
 
 // Calls pokemonGet to fetch in batches then inserts into DB in batches
+// Calls insertPokemonTypes to match type names with type IDs and is inserted into pokemon_types table.
 const fetchAndStore = async (types) => {
   const batchSize = 100;
   const total = 1302;
@@ -114,6 +117,9 @@ const fetchAndStore = async (types) => {
   console.log("done");
 };
 
+// Gets all types and their name, assigns them an ID, and places them inside an array.
+// The array is inserted into the DB.
+// This function returns the types array which will be used in setting up the pokemon_types table.
 const insertTypes = async () => {
   const types = await typesGet();
   const values = types.results.map((type, index) => [index + 1, type.name]);
