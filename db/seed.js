@@ -65,15 +65,50 @@ const insertPokemon = async (pokeBatch) => {
   }
 };
 
+const insertPokemonTypes = async (pokemon, types) => {
+  const values = pokemon.map((pokemon) => {
+    const arr = [];
+    arr.push(pokemon.id);
+    pokemon.types.forEach((poketype) => {
+      types.forEach((typetable) => {
+        if (typetable[1] == poketype.type.name) {
+          arr.push(typetable[0]);
+        }
+      });
+    });
+    if (arr.length < 3) {
+      arr.push(null);
+    }
+    return arr;
+  });
+  const client = await pool.connect();
+  try {
+    await client.query("Begin");
+    const formattedQuery = format(
+      `INSERT INTO pokemon_type (pokemon_id, type_id1, type_id2) VALUES %L ON CONFLICT (pokemon_id, type_id1, type_id2) DO NOTHING;`,
+      values
+    );
+    await client.query(formattedQuery);
+    await client.query("COMMIT");
+    return values;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    console.log(error);
+  } finally {
+    client.release();
+  }
+};
+
 // Calls pokemonGet to fetch in batches then inserts into DB in batches
-const fetchAndStore = async () => {
+const fetchAndStore = async (types) => {
   const batchSize = 100;
   const total = 1302;
 
-  for (let offset = 0; offset < 1302; offset += batchSize) {
+  for (let offset = 0; offset < total; offset += batchSize) {
     console.log(`Fetching Pokemon ${offset + 1} to ${offset + batchSize}`);
     const pokeBatch = await pokemonGet(batchSize, offset);
     await insertPokemon(pokeBatch);
+    await insertPokemonTypes(pokeBatch, types);
     console.log(`Inserting pokemon ${offset + 1} - ${offset + batchSize}`);
   }
   console.log("done");
@@ -81,16 +116,17 @@ const fetchAndStore = async () => {
 
 const insertTypes = async () => {
   const types = await typesGet();
-  const values = types.results.map((type) => [type.name]);
+  const values = types.results.map((type, index) => [index + 1, type.name]);
   const client = await pool.connect();
   try {
     await client.query("Begin");
     const formattedQuery = format(
-      `INSERT INTO type (type_name) VALUES %L ON CONFLICT (type_name) DO NOTHING;`,
+      `INSERT INTO type (id, type_name) VALUES %L ON CONFLICT (type_name) DO NOTHING;`,
       values
     );
     await client.query(formattedQuery);
     await client.query("COMMIT");
+    return values;
   } catch (error) {
     await client.query("ROLLBACK");
     console.log(error);
@@ -100,8 +136,8 @@ const insertTypes = async () => {
 };
 
 const main = async () => {
-  // await fetchAndStore();
-  await insertTypes();
+  const types = await insertTypes(); // types is an array of arrays with each type having an id
+  await fetchAndStore(types);
 };
 
 main();
