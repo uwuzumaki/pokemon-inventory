@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS pokemon_type (
     pokemon_id INTEGER REFERENCES pokemon(id) ON DELETE CASCADE,
     type_id1 INTEGER NOT NULL REFERENCES type(id) ON DELETE CASCADE,
     type_id2 INTEGER REFERENCES type(id) ON DELETE CASCADE,
-    UNQIUE (pokemon_id, type_id1, type_id2)
+    UNIQUE (pokemon_id, type_id1, type_id2)
 );
 `;
 
