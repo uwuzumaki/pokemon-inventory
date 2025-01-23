@@ -6,6 +6,7 @@ const pokeRouter = Router();
 pokeRouter.get("/", pokeController.homepage);
 pokeRouter.post("/", pokeController.pokemon);
 pokeRouter.get("/region", pokeController.pokeRegion);
+pokeRouter.get("region/:gen", pokeController.pokeRegionPost);
 pokeRouter.get("/type", pokeController.pokeType);
 pokeRouter.get("/trainer", pokeController.pokeTrainer);
 pokeRouter.get("/create", pokeController.pokeCreateGet);

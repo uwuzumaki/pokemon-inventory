@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%- include("./partials/head.ejs") %>
   <body>
-    <%- include("./partials/header.ejs") %> blah
+    <%- include("./partials/selection.ejs") %>
+    <br />
+    <%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %>
   </body>
 </html>
