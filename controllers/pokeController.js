@@ -79,6 +79,12 @@ const pokeType = async (req, res) => {
   res.render("poketype", { title: "Pokemon Search" });
 };
 
+const pokeTypePost = async (req, res) => {
+  const type1 = req.body.type1;
+  const type2 = req.body.type2;
+  const pokemon = await db.getPokeTypes(type1, type2);
+  res.render("poketypepost", { title: "Pokemon search", pokemon: pokemon });
+};
 const pokeTrainer = async (req, res) => {
   res.render("poketrainer", { title: "Pokemon Search" });
 };
@@ -97,6 +103,7 @@ module.exports = {
   pokeRegion,
   pokeRegionPost,
   pokeType,
+  pokeTypePost,
   pokeTrainer,
   pokeCreateGet,
   pokeCreatePost,
