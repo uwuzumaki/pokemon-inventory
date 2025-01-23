@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body class="min-h-full">
+    <%- include("./partials/selection.ejs") %>
+    <br />
+    <%- include("./partials/regions.ejs") %>
+    <% pokemon.forEach((pokemon)=> { %>
+         <p><%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %></p>
+    <% }) %>
+  </body>
+</html>
