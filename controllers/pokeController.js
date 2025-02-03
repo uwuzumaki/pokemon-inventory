@@ -89,6 +89,10 @@ const pokeTrainer = async (req, res) => {
   res.render("poketrainer", { title: "Pokemon Search" });
 };
 
+const pokeTrainerPost = async (req, res) => {
+  console.log("123");
+};
+
 const pokeCreateGet = async (req, res) => {
   res.render("pokecreate", { title: "Pokemon Create" });
 };
@@ -105,6 +109,7 @@ module.exports = {
   pokeType,
   pokeTypePost,
   pokeTrainer,
+  pokeTrainerPost,
   pokeCreateGet,
   pokeCreatePost,
 };

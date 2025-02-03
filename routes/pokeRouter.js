@@ -10,6 +10,7 @@ pokeRouter.get("/region/:gen", pokeController.pokeRegionPost);
 pokeRouter.get("/type", pokeController.pokeType);
 pokeRouter.post("/type", pokeController.pokeTypePost);
 pokeRouter.get("/trainer", pokeController.pokeTrainer);
+pokeRouter.get("/post", pokeController.pokeTrainerPost);
 pokeRouter.get("/create", pokeController.pokeCreateGet);
 pokeRouter.post("/create", pokeController.pokeCreatePost);
 
