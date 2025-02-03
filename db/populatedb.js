@@ -20,6 +20,12 @@ CREATE TABLE IF NOT EXISTS pokemon_type (
     type_id2 INTEGER REFERENCES type(id) ON DELETE CASCADE,
     UNIQUE (pokemon_id, type_id1, type_id2)
 );
+
+CREATE TABLE IF NOT EXISTS trainers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    fav_pokemon INTEGER 
+);
 `;
 
 const main = async () => {
