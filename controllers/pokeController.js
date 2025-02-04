@@ -1,4 +1,5 @@
 const db = require("../db/queries");
+const { pokemonValidation } = require("../validation/validation");
 
 // Controllers for each route
 const homepage = (req, res) => {
@@ -89,10 +90,15 @@ const pokeTrainer = async (req, res) => {
   res.render("poketrainer", { title: "Pokemon Search" });
 };
 
-const pokeTrainerPost = async (req, res) => {
-  console.log("123");
-};
-
+const pokeTrainerPost = [
+  pokemonValidation,
+  async (req, res) => {
+    const name = req.body.name;
+    const pokemon = req.pokemon;
+    const result = await db.addTrainer(name, pokemon.pokemon_id);
+    console.log(result);
+  },
+];
 const pokeCreateGet = async (req, res) => {
   res.render("pokecreate", { title: "Pokemon Create" });
 };
