@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS pokemon_type (
 
 CREATE TABLE IF NOT EXISTS trainers (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
     fav_pokemon INTEGER 
 );
 `;

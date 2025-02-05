@@ -15,8 +15,7 @@ const pokemonValidation = async (req, res, next) => {
     req.pokemon = result;
     next();
   } catch (error) {
-    console.log("DB Error: ", error);
-    res.status(500).json({ error: "Internal server error" });
+    next(error);
   }
 };
 

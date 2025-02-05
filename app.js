@@ -13,6 +13,21 @@ app.use(express.urlencoded({ extended: true }));
 // Leads to routes
 app.use("/", pokeRouter);
 
+//Handles any 404 errors
+app.use((req, res, next) => {
+  const error = new Error("Page not found");
+  error.status = 404;
+  next(error);
+});
+
+//Error middleware
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  console.log(err.stack);
+
+  res.status(status);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Runnning on ${PORT}`);
