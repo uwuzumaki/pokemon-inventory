@@ -114,7 +114,6 @@ const getPokeTypes = async (type1, type2) => {
 };
 
 const addTrainer = async (trainer, pokemon) => {
-  console.log(trainer, pokemon);
   const result = await pool.query(
     `INSERT INTO trainers (name, fav_pokemon) VALUES ($1, $2)`,
     [trainer, pokemon]

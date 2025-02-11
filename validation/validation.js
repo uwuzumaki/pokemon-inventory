@@ -3,13 +3,17 @@ const { getOnePokemon } = require("../db/queries");
 const pokemonValidation = async (req, res, next) => {
   const { fav } = req.body;
   if (!fav) {
-    return res.status(400).json({ error: "A pokemon is required" });
+    const error = new Error("A pokemon is required");
+    error.status = 400;
+    return next(error);
   }
 
   try {
     const [result] = await getOnePokemon(fav);
     if (!result) {
-      return res.status(400).json({ error: "The Pokemon was not found." });
+      const error = new Error("The Pokemon was not found");
+      error.status = 404;
+      return next(error);
     }
 
     req.pokemon = result;

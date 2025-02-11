@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body class="min-h-full">
+    <%- include("./partials/selection.ejs") %> 
+    <% if (error) { %>
+       <%= error.message %>
+    <% } %>
+    <% if (success) { %>
+        <%= success %>
+     <% } %>
+  </body>
+</html>

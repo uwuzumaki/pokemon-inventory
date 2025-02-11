@@ -93,12 +93,27 @@ const pokeTrainer = async (req, res) => {
 const pokeTrainerPost = [
   pokemonValidation,
   async (req, res) => {
+    if (req.error) {
+      res.render("poketrainerPost", {
+        title: "Pokemon search",
+        error: req.error,
+      });
+    }
     const name = req.body.name;
     const pokemon = req.pokemon;
-    const result = await db.addTrainer(name, pokemon.pokemon_id);
-    console.log(result);
+    try {
+      const result = await db.addTrainer(name, pokemon.pokemon_id);
+      console.log(result);
+      res.render("poketrainerPost", {
+        title: "Pokemon search",
+        success: "Trainer added successfully!",
+      });
+    } catch (error) {
+      next(error);
+    }
   },
 ];
+
 const pokeCreateGet = async (req, res) => {
   res.render("pokecreate", { title: "Pokemon Create" });
 };
