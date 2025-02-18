@@ -23,7 +23,7 @@ app.use("/", pokeRouter);
 //Error middleware
 app.use((err, req, res, next) => {
   const status = err.status || 500;
-  console.log(err.stack);
+  // console.log(err.stack);
   res.status(status);
 });
 

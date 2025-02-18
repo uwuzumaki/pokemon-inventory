@@ -2,12 +2,16 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
   <body class="min-h-full">
-    <%- include("./partials/selection.ejs") %> 
-    <% if (error) { %>
-       <%= error.message %>
-    <% } %>
+    <%- include("./partials/selection.ejs") %>
+    <br />
     <% if (success) { %>
-        <%= success %>
-     <% } %>
+      <div class="success-message">
+        <p>Success: <%= success %></p>
+      </div>
+    <% } else if (!success){ %>
+      <div class="error-message">
+        <p>Error: <%= error %></p>
+      </div>
+    <% } %>
   </body>
 </html>

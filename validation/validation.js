@@ -5,7 +5,8 @@ const pokemonValidation = async (req, res, next) => {
   if (!fav) {
     const error = new Error("A pokemon is required");
     error.status = 400;
-    return next(error);
+    req.error = error;
+    return next();
   }
 
   try {
@@ -13,13 +14,15 @@ const pokemonValidation = async (req, res, next) => {
     if (!result) {
       const error = new Error("The Pokemon was not found");
       error.status = 404;
-      return next(error);
+      req.error = error;
+      return next();
     }
 
     req.pokemon = result;
     next();
   } catch (error) {
-    next(error);
+    req.error = error;
+    next();
   }
 };
 
