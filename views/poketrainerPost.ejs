@@ -7,6 +7,15 @@
     <% if (success) { %>
       <div class="success-message">
         <p>Success: <%= success %></p>
+        <p>All trainers:</p>
+        <ul>
+          <%  trainers.map(trainer => { %>
+            <p> <%= trainer.name %> <%= trainer.pokemon %> </p>
+            <form action="/trainer/delete/<%= trainer.id %>" method="POST">
+              <button type="submit">Delete trainer</button>
+            </form>
+          <% }) %>
+        </ul>
       </div>
     <% } else if (!success){ %>
       <div class="error-message">

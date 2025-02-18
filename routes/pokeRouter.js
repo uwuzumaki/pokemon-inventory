@@ -11,6 +11,7 @@ pokeRouter.get("/type", pokeController.pokeType);
 pokeRouter.post("/type", pokeController.pokeTypePost);
 pokeRouter.get("/trainer", pokeController.pokeTrainer);
 pokeRouter.post("/trainer", pokeController.pokeTrainerPost);
+pokeRouter.post("/trainer/delete/:id", pokeController.pokeTrainerDelete);
 pokeRouter.get("/create", pokeController.pokeCreateGet);
 pokeRouter.post("/create", pokeController.pokeCreatePost);
 

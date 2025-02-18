@@ -121,9 +121,37 @@ const addTrainer = async (trainer, pokemon) => {
   return result;
 };
 
+const getTrainers = async () => {
+  const { rows } = await pool.query(
+    `SELECT 
+        trainers.id AS id,
+        trainers.name AS name,
+        pokemon.name AS pokemon
+     FROM 
+       trainers
+     INNER JOIN 
+        pokemon
+     ON 
+        trainers.fav_pokemon = pokemon.id
+      ORDER BY id;`
+  );
+  return rows;
+};
+
+const deleteTrainer = async (id) => {
+  const result = await pool.query(
+    `
+    DELETE FROM trainers WHERE id=$1`,
+    [id]
+  );
+  return result;
+};
+
 module.exports = {
   getOnePokemon,
   getOneGen,
   getPokeTypes,
   addTrainer,
+  getTrainers,
+  deleteTrainer,
 };

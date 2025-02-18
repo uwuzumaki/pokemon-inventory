@@ -84,17 +84,19 @@ const pokeTypePost = async (req, res) => {
   const type1 = req.body.type1;
   const type2 = req.body.type2;
   const pokemon = await db.getPokeTypes(type1, type2);
+  const trainers = await db.getTrainers();
   res.render("poketypepost", { title: "Pokemon search", pokemon: pokemon });
 };
+
 const pokeTrainer = async (req, res) => {
-  res.render("poketrainer", { title: "Pokemon Search" });
+  const trainers = await db.getTrainers();
+  res.render("poketrainer", { title: "Pokemon Search", trainers: trainers });
 };
 
 const pokeTrainerPost = [
   pokemonValidation,
   async (req, res, next) => {
     if (req.error) {
-      console.log("in error");
       res.render("poketrainerPost", {
         title: "Pokemon search",
         success: null,
@@ -104,11 +106,12 @@ const pokeTrainerPost = [
       const name = req.body.name;
       const pokemon = req.pokemon;
       try {
-        console.log("in success");
         const result = await db.addTrainer(name, pokemon.pokemon_id);
+        const trainers = await db.getTrainers();
         res.render("poketrainerPost", {
           title: "Pokemon search",
           success: "Trainer added successfully!",
+          trainers: trainers,
         });
       } catch (error) {
         next(error);
@@ -116,6 +119,11 @@ const pokeTrainerPost = [
     }
   },
 ];
+
+const pokeTrainerDelete = async (req, res) => {
+  const result = await db.deleteTrainer(req.params.id);
+  pokeTrainer(req, res);
+};
 
 const pokeCreateGet = async (req, res) => {
   res.render("pokecreate", { title: "Pokemon Create" });
@@ -134,6 +142,7 @@ module.exports = {
   pokeTypePost,
   pokeTrainer,
   pokeTrainerPost,
+  pokeTrainerDelete,
   pokeCreateGet,
   pokeCreatePost,
 };

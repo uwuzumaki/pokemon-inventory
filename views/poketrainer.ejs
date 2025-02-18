@@ -10,5 +10,13 @@
       <input type="text" name="fav" id="fav" />
       <button type="submit">Submit</button>
     </form>
+    <ul>
+      <%  trainers.map(trainer => { %>
+        <p> <%= trainer.name %> <%= trainer.pokemon %> </p>
+        <form action="/trainer/delete/<%= trainer.id %>" method="POST">
+          <button type="submit">Delete trainer</button>
+        </form>
+      <% }) %>
+    </ul>
   </body>
 </html>
