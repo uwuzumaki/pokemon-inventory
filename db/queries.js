@@ -147,6 +147,18 @@ const deleteTrainer = async (id) => {
   return result;
 };
 
+const truncTrainers = async () => {
+  const result = await pool.query(`
+    TRUNCATE TABLE trainers;`);
+  return result;
+};
+
+const truncPokemon = async () => {
+  const result = await pool.query(`
+    TRUNCATE TABLE pokemon;`);
+  return result;
+};
+
 module.exports = {
   getOnePokemon,
   getOneGen,
@@ -154,4 +166,6 @@ module.exports = {
   addTrainer,
   getTrainers,
   deleteTrainer,
+  truncTrainers,
+  truncPokemon,
 };

@@ -4,6 +4,10 @@
   <body>
     <%- include("./partials/selection.ejs") %>
     <br />
-    <%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %>
+    <% if(pokemon) { %>
+      <%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %>
+    <% } else { %>
+      <p>No pokemon by that name was found.</p>
+    <% } %>
   </body>
 </html>

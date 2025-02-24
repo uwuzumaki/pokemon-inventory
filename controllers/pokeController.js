@@ -125,6 +125,16 @@ const pokeTrainerDelete = async (req, res) => {
   pokeTrainer(req, res);
 };
 
+const deleteAllPokemon = async (req, res) => {
+  const result = await db.truncPokemon();
+  homepage(req, res);
+};
+
+const deleteAllTrainers = async (req, res) => {
+  const result = await db.truncTrainers();
+  homepage(req, res);
+};
+
 const pokeCreateGet = async (req, res) => {
   res.render("pokecreate", { title: "Pokemon Create" });
 };
@@ -143,6 +153,8 @@ module.exports = {
   pokeTrainer,
   pokeTrainerPost,
   pokeTrainerDelete,
+  deleteAllPokemon,
+  deleteAllTrainers,
   pokeCreateGet,
   pokeCreatePost,
 };
