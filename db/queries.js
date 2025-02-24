@@ -147,15 +147,15 @@ const deleteTrainer = async (id) => {
   return result;
 };
 
-const truncTrainers = async () => {
+const deleteAllTrainers = async () => {
   const result = await pool.query(`
-    TRUNCATE TABLE trainers;`);
+    DELETE FROM trainers;`);
   return result;
 };
 
-const truncPokemon = async () => {
+const deleteAllPokemon = async () => {
   const result = await pool.query(`
-    TRUNCATE TABLE pokemon;`);
+    DELETE FROM pokemon;`);
   return result;
 };
 
@@ -166,6 +166,6 @@ module.exports = {
   addTrainer,
   getTrainers,
   deleteTrainer,
-  truncTrainers,
-  truncPokemon,
+  truncTrainers: deleteAllTrainers,
+  truncPokemon: deleteAllPokemon,
 };
