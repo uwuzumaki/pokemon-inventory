@@ -2,6 +2,28 @@
 require("dotenv").config();
 const format = require("pg-format");
 const pool = require("./pool");
+const fs = require("node:fs");
+const path = require("node:path");
+const { Readable } = require("stream");
+const { pipeline } = require("stream/promises");
+
+//Downloads the image based on the url given.
+//The fetch API provides a web-standard Readable stream.
+//It is then converted into a stream nodejs recognizes.
+//It is then piped into a filestream that can be written to file.
+const downloadImage = async (url) => {
+  try {
+    const imageName = path.basename(url);
+    const imagePath = path.join(__dirname, "../images/pokemon", imageName);
+    const response = await fetch(url);
+    const webStream = response.body;
+    const nodeStream = Readable.fromWeb(webStream);
+    const fileStream = fs.createWriteStream(imagePath, { flags: "wx" });
+    await pipeline(nodeStream, fileStream);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Gets pokemon from PokemonAPI using pagination
 const pokemonGet = async (limit, offset) => {
@@ -15,6 +37,8 @@ const pokemonGet = async (limit, offset) => {
     const tableReady = pokemonUrl.results.map(async (pokemon) => {
       const response = await fetch(pokemon.url);
       const aPokemon = await response.json();
+      const image = aPokemon.sprites.other["official-artwork"].front_default;
+      await downloadImage(image);
       const { id, name, types } = aPokemon;
       return { id, name, types };
     });
