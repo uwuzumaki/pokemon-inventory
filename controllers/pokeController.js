@@ -73,6 +73,7 @@ const pokeRegionPost = async (req, res) => {
     title: "Pokemon Search",
     pokemon: pokemon,
     gens: gens,
+    image: "/pokemon",
   });
 };
 
