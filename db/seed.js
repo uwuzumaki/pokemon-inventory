@@ -14,7 +14,7 @@ const { pipeline } = require("stream/promises");
 const downloadImage = async (url) => {
   try {
     const imageName = path.basename(url);
-    const imagePath = path.join(__dirname, "../images/pokemon", imageName);
+    const imagePath = path.join(__dirname, "../public/pokemon", imageName);
     const response = await fetch(url);
     const webStream = response.body;
     const nodeStream = Readable.fromWeb(webStream);
