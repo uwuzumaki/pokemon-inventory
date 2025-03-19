@@ -136,14 +136,6 @@ const deleteAllTrainers = async (req, res) => {
   homepage(req, res);
 };
 
-const pokeCreateGet = async (req, res) => {
-  res.render("pokecreate", { title: "Pokemon Create" });
-};
-
-const pokeCreatePost = async (req, res) => {
-  res.render("newpokemon", { title: "New Pokemon" });
-};
-
 module.exports = {
   homepage,
   pokemon,
@@ -156,6 +148,4 @@ module.exports = {
   pokeTrainerDelete,
   deleteAllPokemon,
   deleteAllTrainers,
-  pokeCreateGet,
-  pokeCreatePost,
 };
