@@ -2,6 +2,7 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
+    <div class="main">
     <%- include("./partials/selection.ejs") %>
     <br />
     <% if (success) { %>
@@ -22,5 +23,6 @@
         <p>Error: <%= error %></p>
       </div>
     <% } %>
+    </div>
   </body>
 </html>

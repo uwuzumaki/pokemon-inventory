@@ -535,6 +535,10 @@ video {
 .m-auto {
   margin: auto;
 }
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -547,6 +551,25 @@ video {
 .justify-evenly {
   justify-content: space-evenly;
 }
+.border-0 {
+  border-width: 0px;
+}
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+.border-solid {
+  border-style: solid;
+}
+.border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.p-6 {
+  padding: 1.5rem;
+}
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -555,55 +578,94 @@ video {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
 .font-medium {
   font-weight: 500;
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 .text-red-400 {
   --tw-text-opacity: 1;
   color: rgb(248 113 113 / var(--tw-text-opacity, 1));
 }
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.duration-300 {
+  transition-duration: 300ms;
+}
 
 @layer {
   .body {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .main {
     width: 100%;
   }
   @media (min-width: 640px) {
 
-    .body {
+    .main {
       max-width: 640px;
     }
   }
   @media (min-width: 768px) {
 
-    .body {
+    .main {
       max-width: 768px;
     }
   }
   @media (min-width: 1024px) {
 
-    .body {
+    .main {
       max-width: 1024px;
     }
   }
   @media (min-width: 1280px) {
 
-    .body {
+    .main {
       max-width: 1280px;
     }
   }
   @media (min-width: 1536px) {
 
-    .body {
+    .main {
       max-width: 1536px;
     }
   }
-  .body {
+  .main {
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .btn {
+    margin: 1rem;
+    border-radius: 0.25rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
     padding: 1rem;
   }
+}
+
+.focus\:border-red-400:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(248 113 113 / var(--tw-border-opacity, 1));
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }

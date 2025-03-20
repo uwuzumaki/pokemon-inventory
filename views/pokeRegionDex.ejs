@@ -2,11 +2,13 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
+    <div class="main">
     <%- include("./partials/selection.ejs") %>
     <br />
     <%- include("./partials/regions.ejs") %>
     <% pokemon.forEach((pokemon)=> { %>
          <p><%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %> <img src="<%= image %>/<%= pokemon.pokemon_id %>.png"></p>
     <% }) %>
+  </div>
   </body>
 </html>

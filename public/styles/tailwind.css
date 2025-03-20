@@ -4,6 +4,12 @@
 
 @layer {
   .body {
-    @apply container mx-auto p-4 flex flex-col justify-center items-center;
+    @apply w-full p-4 flex flex-col justify-center items-center;
+  }
+  .main {
+    @apply container mx-auto flex flex-col justify-center items-center;
+  }
+  .btn {
+    @apply p-4 m-4 bg-red-400 rounded;
   }
 }

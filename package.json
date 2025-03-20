@@ -16,7 +16,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node --watch app.js",
-    "build:css": "postcss public/styles/tailwind.css -o public/styles/styles.css",
+    "dev": "nodemon app.js",
+    "build:css": "postcss public/styles/tailwind.css -o public/styles/styles.css --watch",
     "createdb": "node db/populatedb.js"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9"
   }

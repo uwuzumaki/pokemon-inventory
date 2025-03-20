@@ -2,6 +2,7 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
+    <div class="main">
     <%- include("./partials/selection.ejs") %> Add a trainer!
     <form action="/trainer" method="POST">
       <label for="name">Name</label>
@@ -18,5 +19,6 @@
         </form>
       <% }) %>
     </ul>
+    </div>
   </body>
 </html>
