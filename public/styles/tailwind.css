@@ -9,7 +9,15 @@
   .main {
     @apply container mx-auto flex flex-col justify-center items-center;
   }
-  .btn {
+  .btnSubmit {
     @apply px-4 py-2 m-2 rounded-3xl text-white bg-blue-400;
+  }
+
+  .btnChoice {
+    @apply px-4 py-1 mx-4 my-2 rounded text-white bg-blue-400;
+  }
+
+  .btnDelete {
+    @apply px-2 py-1 mx-4 my-2 rounded text-white bg-red-500;
   }
 }
