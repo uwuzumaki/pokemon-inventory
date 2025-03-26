@@ -9,7 +9,11 @@ const homepage = (req, res) => {
 const pokemon = async (req, res) => {
   const [pokemon] = await db.getOnePokemon(req.body.pokename);
   console.log(pokemon);
-  res.render("pokemon", { title: "Pokemon Search", pokemon: pokemon });
+  res.render("pokemon", {
+    title: "Pokemon Search",
+    pokemon: pokemon,
+    image: "/pokemon",
+  });
 };
 
 const pokeRegion = async (req, res) => {
