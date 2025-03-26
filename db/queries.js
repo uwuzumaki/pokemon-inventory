@@ -21,7 +21,7 @@ FROM
 WHERE
    p.NAME = $1
  `,
-    [name]
+    [name.toLowerCase().trim()],
   );
   return rows;
 };
@@ -47,7 +47,7 @@ FROM
 WHERE
    p.id >= $1 AND p.id <= $2
  `,
-    [start, end]
+    [start, end],
   );
   return rows;
 };
@@ -66,7 +66,7 @@ const getPokeTypes = async (type1, type2) => {
           JOIN TYPE t1 ON pt.type_id1 = t1.id
           LEFT JOIN TYPE t2 ON pt.type_id2 = t2.id
         WHERE t1.type_name = $1 AND t2.type_name IS NULL`,
-      [type1]
+      [type1],
     );
     return rows;
   }
@@ -86,7 +86,7 @@ const getPokeTypes = async (type1, type2) => {
           JOIN TYPE t1 ON pt.type_id1 = t1.id
           LEFT JOIN TYPE t2 ON pt.type_id2 = t2.id
         WHERE t1.type_name = $1 AND t2.type_name = $2`,
-    [type1, type2]
+    [type1, type2],
   );
 
   rows = result1;
@@ -105,7 +105,7 @@ const getPokeTypes = async (type1, type2) => {
             JOIN TYPE t1 ON pt.type_id1 = t1.id
             LEFT JOIN TYPE t2 ON pt.type_id2 = t2.id
           WHERE t1.type_name = $1 AND t2.type_name = $2`,
-      [type2, type1]
+      [type2, type1],
     );
     rows = result2;
   }
@@ -116,7 +116,7 @@ const getPokeTypes = async (type1, type2) => {
 const addTrainer = async (trainer, pokemon) => {
   const result = await pool.query(
     `INSERT INTO trainers (name, fav_pokemon) VALUES ($1, $2)`,
-    [trainer, pokemon]
+    [trainer, pokemon],
   );
   return result;
 };
@@ -133,7 +133,7 @@ const getTrainers = async () => {
         pokemon
      ON 
         trainers.fav_pokemon = pokemon.id
-      ORDER BY id;`
+      ORDER BY id;`,
   );
   return rows;
 };
@@ -142,7 +142,7 @@ const deleteTrainer = async (id) => {
   const result = await pool.query(
     `
     DELETE FROM trainers WHERE id=$1`,
-    [id]
+    [id],
   );
   return result;
 };
