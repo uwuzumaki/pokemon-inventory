@@ -6,9 +6,11 @@
     <%- include("./partials/selection.ejs") %>
     <br />
     <%- include("./partials/regions.ejs") %>
-    <% pokemon.forEach((pokemon)=> { %>
-         <p><%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %> <img src="<%= image %>/<%= pokemon.pokemon_id %>.png"></p>
-    <% }) %>
-  </div>
+      <div class="container flex flex-wrap justify-center m-4">
+        <% pokemon.forEach((pokemon)=>%> <% { %>
+          <div class="max-w-xs">ID: <%= pokemon.pokemon_id %> Name: <%= pokemon.pokemon_name %> <img class="max-w-[128px]" src="<%= image %>/<%= pokemon.pokemon_id %>.png"></div>
+        <% }) %>
+      </div>
+    </div>
   </body>
 </html>
