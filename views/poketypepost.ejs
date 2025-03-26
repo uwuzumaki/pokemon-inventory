@@ -3,11 +3,11 @@
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
     <div class="main">
-    <%- include("./partials/selection.ejs") %>
-    <br />
-    <% pokemon.forEach((pokemon)=> { %>
-         <p><%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %></p>
-    <% }) %>
-  </div>
+      <%- include("./partials/selection.ejs") %>
+      <br />
+      <% pokemon.forEach((pokemon)=> { %>
+      <p><%= pokemon.pokemon_id %> <%= pokemon.pokemon_name %></p>
+      <% }) %>
+    </div>
   </body>
 </html>

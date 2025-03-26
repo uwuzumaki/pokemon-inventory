@@ -3,22 +3,23 @@
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
     <div class="main">
-    <%- include("./partials/selection.ejs") %> Add a trainer!
-    <form action="/trainer" method="POST">
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" />
-      <label for="fav">Favourite Pokemon:</label>
-      <input type="text" name="fav" id="fav" />
-      <button type="submit">Submit</button>
-    </form>
-    <ul>
-      <%  trainers.map(trainer => { %>
-        <p> <%= trainer.name %> <%= trainer.pokemon %> </p>
+      <%- include("./partials/selection.ejs") %> Add a trainer!
+      <form action="/trainer" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+        <label for="fav">Favourite Pokemon:</label>
+        <input type="text" name="fav" id="fav" />
+        <button type="submit">Submit</button>
+      </form>
+      <ul>
+        <% trainers.map(trainer =>%>
+        <% { %>
+        <p><%= trainer.name %> <%= trainer.pokemon %></p>
         <form action="/trainer/delete/<%= trainer.id %>" method="POST">
           <button type="submit">Delete trainer</button>
         </form>
-      <% }) %>
-    </ul>
+        <% }) %>
+      </ul>
     </div>
   </body>
 </html>
