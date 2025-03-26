@@ -3,12 +3,26 @@
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
     <div class="main">
-    <%- include("./partials/selection.ejs") %>
-    <br />
-    <%- include("./partials/regions.ejs") %>
+      <%- include("./partials/selection.ejs") %>
+      <br />
+      <%- include("./partials/regions.ejs") %>
       <div class="container flex flex-wrap justify-center m-4">
-        <% pokemon.forEach((pokemon)=>%> <% { %>
-          <div class="max-w-xs">ID: <%= pokemon.pokemon_id %> Name: <%= pokemon.pokemon_name %> <img class="max-w-[128px]" src="<%= image %>/<%= pokemon.pokemon_id %>.png"></div>
+        <% pokemon.forEach((pokemon)=> { %>
+        <div
+          class="max-w-xs bg-stone-100 border-2 border-emerald-400 rounded-md m-2 p-2"
+        >
+          <p class="flex justify-center text-lg font-semibold">
+            <%= pokemon.pokemon_name.charAt(0).toUpperCase() +
+            pokemon.pokemon_name.slice(1) %>
+          </p>
+          <img
+            class="max-w-[256px]"
+            src="<%= image %>/<%= pokemon.pokemon_id %>.png"
+          />
+          <div class="flex justify-center">
+            Pokedex Number: <%= pokemon.pokemon_id %>
+          </div>
+        </div>
         <% }) %>
       </div>
     </div>
