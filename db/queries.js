@@ -53,7 +53,7 @@ WHERE
 };
 
 const getPokeTypes = async (type1, type2) => {
-  if (type2 == "null") {
+  if (type2 == null || type2 == "null") {
     const { rows } = await pool.query(
       `SELECT
           p.id AS pokemon_id,

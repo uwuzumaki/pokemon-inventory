@@ -87,9 +87,9 @@ const pokeType = async (req, res) => {
 
 const pokeTypePost = async (req, res) => {
   const type1 = req.body.type1;
-  const type2 = req.body.type2;
+  const type2 = req.body.type2 == req.body.type1 ? null : req.body.type2;
   const pokemon = await db.getPokeTypes(type1, type2);
-  const trainers = await db.getTrainers();
+  // console.log(pokemon);
   res.render("poketypepost", {
     title: "Pokemon search",
     pokemon: pokemon,
