@@ -90,7 +90,11 @@ const pokeTypePost = async (req, res) => {
   const type2 = req.body.type2;
   const pokemon = await db.getPokeTypes(type1, type2);
   const trainers = await db.getTrainers();
-  res.render("poketypepost", { title: "Pokemon search", pokemon: pokemon });
+  res.render("poketypepost", {
+    title: "Pokemon search",
+    pokemon: pokemon,
+    image: "/pokemon",
+  });
 };
 
 const pokeTrainer = async (req, res) => {
