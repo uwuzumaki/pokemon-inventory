@@ -44,32 +44,21 @@
       <div class="container flex justify-center m-4 text-lg font-semibold">
         Trainer List
       </div>
-      <ul class="md:container">
-        <div class="flex">
-          <p class="flex-1 flex justify-end">Trainer</p>
-          <p class="flex-1 flex justify-center">Favourite Pokemon</p>
-          <p class="flex-1 flex justify-center"></p>
-        </div>
+      <div class="container flex flex-wrap justify-center m-4">
         <% trainers.map(trainer => { %>
-        <li class="lg:container w-full flex justify-center items-center">
-          <div class="flex-1 basis-[200px] flex justify-end">
-            <%= trainer.name %>
-          </div>
-          <div class="flex-1 basis-[200px] flex justify-center">
-            <%= trainer.pokemon %>
-          </div>
-          <form
-            class="flex-1 basis-[200px] flex justify-start"
-            action="/trainer/delete/<%= trainer.id %>"
-            method="POST"
-          >
-            <button class="btnChoice bg-red-500" type="submit">
-              Delete trainer
-            </button>
-          </form>
-        </li>
+        <div
+          class="flex flex-col items-center max-w-xs bg-stone-100 border-2 border-emerald-400 rounded-md m-2 p-2"
+        >
+          <p class="flex justify-center text-lg font-semibold">
+            <%= trainer.name.charAt(0).toUpperCase() + trainer.name.slice(1) %>
+          </p>
+          <img
+            class="max-w-[256px]"
+            src="/pokemon/<%= trainer.pokemon_id %>.png"
+          />
+        </div>
         <% }) %>
-      </ul>
+      </div>
     </div>
   </body>
 </html>
