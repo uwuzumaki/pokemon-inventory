@@ -4,8 +4,10 @@
   <body class="body prose">
     <div class="main">
       <%- include("./partials/selection.ejs") %>
-      <br />
-      <%- include("./partials/regions.ejs") %>
+      <div class="flex flex-col justify-center items-center">
+        <div class="m-2 text-lg font-bold">Select a Region!</div>
+        <%- include("./partials/regions.ejs") %>
+      </div>
     </div>
   </body>
 </html>
