@@ -126,7 +126,8 @@ const getTrainers = async () => {
     `SELECT 
         trainers.id AS id,
         trainers.name AS name,
-        pokemon.name AS pokemon
+        pokemon.name AS pokemon,
+        pokemon.id AS pokemon_id
      FROM 
        trainers
      INNER JOIN 
