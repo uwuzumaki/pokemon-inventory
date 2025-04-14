@@ -3,8 +3,11 @@
   <%- include("./partials/head.ejs") %>
   <body class="body prose">
     <div class="main">
-      <%- include("./partials/selection.ejs") %> <%-
-      include("./partials/type.ejs") %>
+      <%- include("./partials/selection.ejs") %>
+      <div class="flex flex-col justify-center items-center">
+        <div class="m-2 text-lg font-bold">Select Types!</div>
+        <%- include("./partials/type.ejs") %>
+      </div>
     </div>
   </body>
 </html>
