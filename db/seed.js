@@ -113,7 +113,7 @@ const insertPokemonTypes = async (pokemon, types) => {
     await client.query("Begin");
     const formattedQuery = format(
       `INSERT INTO pokemon_type (pokemon_id, type_id1, type_id2) VALUES %L ON CONFLICT (pokemon_id, type_id1, type_id2) DO NOTHING;`,
-      values
+      values,
     );
     await client.query(formattedQuery);
     await client.query("COMMIT");
@@ -152,7 +152,7 @@ const insertTypes = async () => {
     await client.query("Begin");
     const formattedQuery = format(
       `INSERT INTO type (id, type_name) VALUES %L ON CONFLICT (type_name) DO NOTHING;`,
-      values
+      values,
     );
     await client.query(formattedQuery);
     await client.query("COMMIT");
@@ -165,9 +165,18 @@ const insertTypes = async () => {
   }
 };
 
+const databaseCheck = async () => {
+  const SQL = `SELECT * FROM pokemon WHERE id=1;`;
+  const { rows } = await pool.query(SQL);
+  return rows;
+};
+
 const main = async () => {
   const types = await insertTypes(); // types is an array of arrays with each type having an id
-  await fetchAndStore(types);
+  const exists = await databaseCheck();
+  if (!exists) {
+    await fetchAndStore(types);
+  }
 };
 
 main();
