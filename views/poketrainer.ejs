@@ -44,6 +44,11 @@
       <div class="container flex justify-center m-4 text-lg font-semibold">
         Trainer List
       </div>
+      <% if (success) { %>
+      <%- include("./partials/SuccessOrFailure.ejs", { type: 'success', message: success }) %>
+      <% } else if (error) { %>
+      <%- include("./partials/SuccessOrFailure.ejs", { type: 'error', message: error }) %>
+      <% } %>
       <div class="container flex flex-wrap justify-center m-4">
         <% trainers.map(trainer => { %>
         <div
