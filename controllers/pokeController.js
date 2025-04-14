@@ -97,17 +97,29 @@ const pokeTypePost = async (req, res) => {
   });
 };
 
-const pokeTrainer = async (req, res) => {
+const pokeTrainer = async (req, res, next) => {
   const trainers = await db.getTrainers();
-  res.render("poketrainer", { title: "Pokemon Search", trainers: trainers });
+  try {
+    res.render("poketrainer", {
+      title: "Pokemon Search",
+      trainers: trainers,
+      success: null,
+      error: null,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
 const pokeTrainerPost = [
   pokemonValidation,
   async (req, res, next) => {
     if (req.error) {
-      res.render("poketrainerPost", {
-        title: "Pokemon search",
+      const trainers = await db.getTrainers();
+      res.render("poketrainer", {
+        title: "Pokemon Search",
+        trainers: trainers,
         success: null,
         error: req.error.message,
       });
@@ -117,10 +129,10 @@ const pokeTrainerPost = [
       try {
         const result = await db.addTrainer(name, pokemon.pokemon_id);
         const trainers = await db.getTrainers();
-        res.render("poketrainerPost", {
-          title: "Pokemon search",
-          success: "Trainer added successfully!",
+        res.render("poketrainer", {
+          title: "Pokemon Search",
           trainers: trainers,
+          success: "Trainer added successfully!",
         });
       } catch (error) {
         next(error);
