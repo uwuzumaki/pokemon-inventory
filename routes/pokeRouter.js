@@ -14,5 +14,6 @@ pokeRouter.post("/trainer", pokeController.pokeTrainerPost);
 pokeRouter.post("/trainer/delete/:id", pokeController.pokeTrainerDelete);
 pokeRouter.post("/pokemon/delete", pokeController.deleteAllPokemon);
 pokeRouter.post("/trainer/delete", pokeController.deleteAllTrainers);
+pokeRouter.post("/pokemon/addAll", pokeController.addAllPokemon);
 
 module.exports = pokeRouter;

@@ -174,7 +174,7 @@ const databaseCheck = async () => {
 const main = async () => {
   const types = await insertTypes(); // types is an array of arrays with each type having an id
   const exists = await databaseCheck();
-  if (!exists) {
+  if (exists.length == 0) {
     await fetchAndStore(types);
   }
 };

@@ -156,6 +156,11 @@ const deleteAllTrainers = async (req, res) => {
   homepage(req, res);
 };
 
+const addAllPokemon = async (req, res) => {
+  const result = await db.seedPokemon();
+  homepage(req, res);
+};
+
 module.exports = {
   homepage,
   pokemon,
@@ -168,4 +173,5 @@ module.exports = {
   pokeTrainerDelete,
   deleteAllPokemon,
   deleteAllTrainers,
+  addAllPokemon,
 };

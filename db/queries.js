@@ -1,4 +1,5 @@
 const pool = require("./pool");
+const main = require("./seed");
 
 const getOnePokemon = async (name) => {
   const { rows } = await pool.query(
@@ -160,6 +161,11 @@ const deleteAllPokemon = async () => {
   return result;
 };
 
+const seedPokemon = async () => {
+  const result = await main();
+  return result;
+};
+
 module.exports = {
   getOnePokemon,
   getOneGen,
@@ -169,4 +175,5 @@ module.exports = {
   deleteTrainer,
   truncTrainers: deleteAllTrainers,
   truncPokemon: deleteAllPokemon,
+  seedPokemon,
 };
