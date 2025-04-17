@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "start": "node --watch app.js",
+    "start": "node app.js",
     "dev": "nodemon app.js",
     "build:css": "postcss public/styles/tailwind.css -o public/styles/styles.css --watch",
     "createdb": "node db/populatedb.js"
