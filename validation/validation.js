@@ -1,5 +1,6 @@
 const { getOnePokemon } = require("../db/queries");
 
+// Validation for making sure when the user adds a pokemon, it is a valid pokemon
 const pokemonValidation = async (req, res, next) => {
   const { fav } = req.body;
   if (!fav) {

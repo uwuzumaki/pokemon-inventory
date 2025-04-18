@@ -6,6 +6,7 @@ const homepage = (req, res) => {
   res.render("homepage", { title: "Pokemon Search" });
 };
 
+// Landing page
 const pokemon = async (req, res) => {
   const [pokemon] = await db.getOnePokemon(req.body.pokename);
   console.log(pokemon);
@@ -16,6 +17,7 @@ const pokemon = async (req, res) => {
   });
 };
 
+// Page that lists all the Pokemon Regions
 const pokeRegion = async (req, res) => {
   const gens = {
     one: 1,
@@ -31,6 +33,7 @@ const pokeRegion = async (req, res) => {
   res.render("pokeRegion", { title: "Pokemon Search", gens: gens });
 };
 
+// Lists all the Pokemon once a specific region has been selected
 const pokeRegionPost = async (req, res) => {
   const gens = {
     one: 1,
@@ -81,15 +84,16 @@ const pokeRegionPost = async (req, res) => {
   });
 };
 
+// Page that allows users to pick two pokemon types
 const pokeType = async (req, res) => {
   res.render("poketype", { title: "Pokemon Search" });
 };
 
+// Page that lists all the pokemon with the selected types
 const pokeTypePost = async (req, res) => {
   const type1 = req.body.type1;
   const type2 = req.body.type2 == req.body.type1 ? null : req.body.type2;
   const pokemon = await db.getPokeTypes(type1, type2);
-  // console.log(pokemon);
   res.render("poketypepost", {
     title: "Pokemon search",
     pokemon: pokemon,
@@ -97,6 +101,7 @@ const pokeTypePost = async (req, res) => {
   });
 };
 
+// Page for adding trainers and their favourite pokemon
 const pokeTrainer = async (req, res, next) => {
   const trainers = await db.getTrainers();
   try {
@@ -112,6 +117,7 @@ const pokeTrainer = async (req, res, next) => {
   }
 };
 
+// Page that lists all trainers after trying to add a new trainer
 const pokeTrainerPost = [
   pokemonValidation,
   async (req, res, next) => {
@@ -141,21 +147,25 @@ const pokeTrainerPost = [
   },
 ];
 
+// Button that deletes a specific trainer
 const pokeTrainerDelete = async (req, res) => {
   const result = await db.deleteTrainer(req.params.id);
   pokeTrainer(req, res);
 };
 
+// Button that deletes all Pokemon inside the database
 const deleteAllPokemon = async (req, res) => {
   const result = await db.truncPokemon();
   homepage(req, res);
 };
 
+// Button that deletes all trainers
 const deleteAllTrainers = async (req, res) => {
   const result = await db.truncTrainers();
   homepage(req, res);
 };
 
+// Button that repopulates all pokemon inside the database
 const addAllPokemon = async (req, res) => {
   const result = await db.seedPokemon();
   homepage(req, res);
