@@ -66,6 +66,9 @@
             class="max-w-[256px]"
             src="/pokemon/<%= trainer.pokemon_id %>.png"
           />
+          <form action="/trainer/delete/<%= trainer.id %>" method="POST">
+            <button class="btnDelete" type="submit">Delete trainer</button>
+          </form>
         </div>
         <% }) %>
       </div>
